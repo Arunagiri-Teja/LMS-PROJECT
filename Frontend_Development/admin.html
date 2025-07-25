@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LMS Admin Dashboard</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    body { display: flex; min-height: 100vh; background: #f8fafc; color: #334155; transition: 0.3s; }
+    body.dark-mode { background: #0f172a; color: #e2e8f0; }
+    .sidebar {
+      width: 240px; background: #4f46e5; color: white; position: fixed; height: 100%; padding: 20px 0;
+    }
+    .sidebar h2 { text-align: center; margin-bottom: 30px; }
+    .sidebar a { display: block; color: white; padding: 15px 30px; text-decoration: none; }
+    .sidebar a:hover, .sidebar a.active { background: #6366f1; }
+    .main { margin-left: 240px; flex: 1; display: flex; flex-direction: column; }
+    .header { background: #4f46e5; color: white; padding: 20px; display: flex; justify-content: space-between; }
+    .content { padding: 20px; flex: 1; overflow-y: auto; background: inherit; }
+    .cards { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px; }
+    .card {
+      flex: 1 1 200px; background: white; color: #334155; padding: 20px; border-radius: 12px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; transition: 0.3s;
+    }
+    .card:hover { transform: translateY(-5px); background: #e0f2fe; }
+    body.dark-mode .card { background: #475569; color: white; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+    th, td { border: 1px solid #cbd5e1; padding: 10px; text-align: left; }
+    th { background: #6366f1; color: white; }
+    tr:nth-child(even) { background: #f1f5f9; }
+    tr:hover { background: #e2e8f0; }
+    body.dark-mode th, body.dark-mode tr:nth-child(even), body.dark-mode tr:hover {
+      background: #1e293b; color: white;
+    }
+    .footer { background: #4f46e5; color: white; text-align: center; padding: 10px; }
+    .panel { display: none; }
+    .panel.active { display: block; }
+    .toggle-btn, button.submit-btn {
+      background: #6366f1; color: white; border: none; padding: 10px 20px; margin: 10px 0; cursor: pointer;
+      border-radius: 8px;
+    }
+    .toggle-btn:hover, button.submit-btn:hover { background: #4f46e5; }
+    input, textarea {
+      width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #cbd5e1; border-radius: 8px;
+    }
+    @media (max-width: 768px) { .sidebar { width: 200px; } .main { margin-left: 200px; } }
+    @media (max-width: 576px) { .sidebar { display: none; } .main { margin-left: 0; } }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>Admin Panel</h2>
+    <a href="#" class="menu-link active" data-panel="dashboard"><i class="fa fa-home"></i> Dashboard</a>
+    <a href="#" class="menu-link" data-panel="users"><i class="fa fa-user"></i> User Management</a>
+    <a href="#" class="menu-link" data-panel="courses"><i class="fa fa-book"></i> Course Management</a>
+    <a href="#" class="menu-link" data-panel="feedback"><i class="fa fa-comments"></i> Feedback & Support</a>
+    <a href="#" class="menu-link" data-panel="settings"><i class="fa fa-cog"></i> Settings</a>
+    <a href="#" onclick="alert('Logged Out!')"><i class="fa fa-sign-out-alt"></i> Logout</a>
+  </div>
+  <div class="main">
+    <div class="header">
+      <h1>Welcome, Admin</h1>
+      <div class="icons">
+        <i class="fa fa-bell"></i> <i class="fa fa-user-circle"></i>
+      </div>
+    </div>
+    <div class="content">
+      <div id="dashboard" class="panel active">
+        <h2>Dashboard Overview</h2>
+        <div class="cards">
+          <div class="card"><h3>Total Users</h3><p>1,250 Registered</p></div>
+          <div class="card"><h3>Active Courses</h3><p>45 Courses Running</p></div>
+          <div class="card"><h3>Revenue</h3><p>₹2,50,000 Collected</p></div>
+          <div class="card"><h3>Feedbacks</h3><p>35 New Feedbacks</p></div>
+        </div>
+        <h3>User Engagement Over Time</h3>
+        <canvas id="usageChart" width="400" height="200"></canvas>
+      </div>
+      <div id="users" class="panel">
+        <h2>User Management</h2>
+        <table><thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Status</th></tr></thead><tbody>
+        <tr><td>001</td><td>John Doe</td><td>john@example.com</td><td>Active</td></tr>
+        </tbody></table>
+      </div>
+      <div id="courses" class="panel">
+        <h2>Course Management</h2>
+        <table><thead><tr><th>ID</th><th>Title</th><th>Instructor</th><th>Status</th></tr></thead><tbody>
+        <tr><td>101</td><td>Web Development</td><td>John Doe</td><td>Published</td></tr>
+        </tbody></table>
+      </div>
+      <div id="feedback" class="panel">
+        <h2>Feedback & Support</h2>
+        <form onsubmit="addFeedback(event)">
+          <input type="text" id="feedbackUser" placeholder="User Name" required>
+          <textarea id="feedbackMsg" placeholder="Feedback Message" required></textarea>
+          <button type="submit" class="submit-btn">Add Feedback</button>
+        </form>
+        <table id="feedbackTable">
+          <thead><tr><th>ID</th><th>User</th><th>Message</th><th>Status</th></tr></thead><tbody>
+            <tr><td>F001</td><td>John Doe</td><td>Great course!</td><td>Reviewed</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="settings" class="panel">
+        <h2>Settings</h2>
+        <button class="toggle-btn" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+        <button class="toggle-btn" onclick="toggleNotifications()">Toggle Email Notifications</button>
+        <p id="notificationStatus">Email Notifications: ON</p>
+      </div>
+    </div>
+    <div class="footer">
+      &copy; 2025 LMS Admin Dashboard
+    </div>
+  </div>
+  <script>
+    const links = document.querySelectorAll('.menu-link');
+    const panels = document.querySelectorAll('.panel');
+    links.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        links.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        panels.forEach(panel => panel.classList.remove('active'));
+        document.getElementById(link.getAttribute('data-panel')).classList.add('active');
+      });
+    });
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+    let notificationsOn = true;
+    function toggleNotifications() {
+      notificationsOn = !notificationsOn;
+      document.getElementById('notificationStatus').innerText = `Email Notifications: ${notificationsOn ? 'ON' : 'OFF'}`;
+    }
+    function addFeedback(e) {
+      e.preventDefault();
+      const user = document.getElementById('feedbackUser').value;
+      const msg = document.getElementById('feedbackMsg').value;
+      const table = document.getElementById('feedbackTable').querySelector('tbody');
+      const id = 'F' + Math.floor(Math.random() * 1000);
+      table.innerHTML += `<tr><td>${id}</td><td>${user}</td><td>${msg}</td><td>Pending</td></tr>`;
+      document.getElementById('feedbackUser').value = '';
+      document.getElementById('feedbackMsg').value = '';
+      alert('Feedback Added!');
+    }
+    const ctx = document.getElementById('usageChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+          label: 'Active Users',
+          data: [120, 150, 200, 170, 220, 250],
+          borderColor: '#6366f1',
+          backgroundColor: 'rgba(99, 102, 241, 0.2)',
+          fill: true,
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: true } }
+      }
+    });
+  </script>
+</body>
+</html>

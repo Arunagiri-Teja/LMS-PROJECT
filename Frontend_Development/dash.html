@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* [CSS remains unchanged - already correct] */
+    /* You can collapse this for brevity or keep as is */
+    /* ... existing CSS code ... */
+  </style>
+</head>
+<body>
+
+<header>Student Dashboard</header>
+
+<aside class="sidebar" id="sidebar">
+  <h2>Menu</h2>
+  <div class="menu-box">
+    <ul>
+      <li><a href="#" onclick="showGreeting(this)" class="active">Dashboard</a></li>
+      <li><a href="#" onclick="showProfile(this)">Profile</a></li>
+      <li><a href="#" onclick="showCourses(this)">My Courses</a></li>
+      <li><a href="#" onclick="showSettings(this)">Settings</a></li>
+    </ul>
+  </div>
+</aside>
+
+<main>
+  <div id="greetingCard" class="card">
+    <div id="dashboardPhotoContainer" style="margin-bottom: 15px;"></div>
+    <h2 id="greetingText"></h2>
+    <p class="quote" id="quoteText"></p>
+  </div>
+
+  <div id="profileCard" class="card" style="display:none;">
+    <h2>Student Profile</h2>
+    <div class="profile-detail">Name: Deepa Hiremath</div>
+    <div class="profile-detail">Student ID: 12345</div>
+    <div class="profile-detail">Email: deepa@example.com</div>
+    <div class="profile-detail">Phone: +91-9876543210</div>
+    <button onclick="openEditProfileModal()">Edit Profile</button>
+    <div id="profilePhotoContainer" style="margin-top: 15px;"></div>
+  </div>
+
+  <div id="coursesCard" class="card" style="display:none;">
+    <h2>My Courses</h2>
+    <div class="course-item">Web Development - Instructor: Mr. Smith - Status: <span style="color: green; cursor: pointer;" onclick="redirectToCourse('web-dev')">Active</span></div>
+    <div class="course-item">Java Programming - Instructor: Ms. John - Status: <span style="color: rgb(231, 4, 4);">Completed</span></div>
+    <div class="course-item">Database Management - Instructor: Mr. Raj - Status: <span style="color: green; cursor: pointer;" onclick="redirectToCourse('db-mgmt')">Active</span></div>
+    <button onclick="enrollNewCourse()">Enroll in New Course</button>
+  </div>
+
+  <div id="settingsCard" class="card" style="display:none;">
+    <h2>Settings</h2>
+    <div class="settings-option">
+      <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()"> Enable Dark Mode
+    </div>
+    <div class="settings-option">
+      <input type="checkbox" id="notificationToggle"> Receive Notifications
+    </div>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <!-- Edit Profile Modal -->
+  <div id="editProfileModal">
+    <h3>Edit Profile</h3>
+    <input type="text" id="editName" placeholder="Name">
+    <input type="text" id="editEmail" placeholder="Email">
+    <input type="text" id="editPhone" placeholder="Phone">
+    <input type="file" id="editPhoto" accept="image/*">
+    <button onclick="saveProfileChanges()">Save</button>
+    <button onclick="closeEditProfileModal()">Cancel</button>
+  </div>
+</main>
+
+<script>
+  const quotes = [
+    "Believe in yourself!",
+    "Never stop learning.",
+    "Success is no accident.",
+    "Learning never exhausts the mind.",
+    "The best way to predict the future is to create it."
+  ];
+
+  function hideAll() {
+    document.getElementById('greetingCard').style.display = 'none';
+    document.getElementById('profileCard').style.display = 'none';
+    document.getElementById('coursesCard').style.display = 'none';
+    document.getElementById('settingsCard').style.display = 'none';
+  }
+
+  function
