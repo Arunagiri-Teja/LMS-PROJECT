@@ -1,0 +1,218 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: radial-gradient(circle at top left, #8f94fb 0%, #4e54c8 100%);
+  font-family: 'Poppins', sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.login-container {
+  background: #ffffff;
+  padding: 50px 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  width: 380px;
+  max-width: 90%;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.login-container:hover {
+  transform: scale(1.02);
+}
+
+.login-container h2 {
+  color: #8E44AD;
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 28px;
+}
+
+.login-container p {
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-group i {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  color: #8E44AD;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 15px 12px 45px;
+  border: 1px solid #F5B041;
+  border-radius: 8px;
+  background: #fff;
+  outline: none;
+  transition: all 0.3s ease;
+  color: #333;
+}
+
+.input-group input:focus {
+  border-color: #8E44AD;
+  box-shadow: 0 0 5px rgba(142, 68, 173, 0.5);
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #666;
+  font-size: 18px;
+  user-select: none;
+}
+
+.toggle-password:hover {
+  color: #8E44AD;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  margin-top: 10px;
+  color: #555;
+}
+
+.options a {
+  text-decoration: none;
+  color: #4a90e2;
+}
+
+.options a:hover {
+  color: #1a73e8;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.checkbox-container input {
+  margin-right: 6px;
+}
+
+/* Specific rule for signin button to override general button styles */
+.login-container .signin-btn {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  background: radial-gradient(circle at top left, #8e92ea 0%, #585ecf 100%);
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 0px;
+  margin-top: 20px;
+}
+
+.login-container .signin-btn:hover {
+  background:   linear-gradient(45deg, #F5B041, #8E44AD);
+}
+
+/* Remove the general button rule to avoid conflicts */
+/* button {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(45deg, #F5B041, #8E44AD);
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+} */
+
+/* Remove general hover rule to avoid interference */
+/* button:hover {
+  background: linear-gradient(45deg, #D68910, #6C3483);
+} */
+
+.register-text {
+  margin-top: 25px;
+  font-size: 13px;
+  color: #555;
+}
+
+.register-text a {
+  color: #8E44AD;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.register-text a:hover {
+  color: #F5B041;
+}
+
+.background-shapes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.4;
+  animation: float 6s ease-in-out infinite alternate;
+}
+
+.shape1 {
+  width: 300px;
+  height: 300px;
+  background: #8E44AD;
+  top: -50px;
+  left: -50px;
+}
+
+.shape2 {
+  width: 200px;
+  height: 200px;
+  background: #F5B041;
+  bottom: -60px;
+  right: -60px;
+}
+
+.shape3 {
+  width: 150px;
+  height: 150px;
+  background: #ffffff55;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(20px); }
+}

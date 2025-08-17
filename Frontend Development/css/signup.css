@@ -2,71 +2,181 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
 }
 
 body {
+  background: radial-gradient(circle at top left, #8f94fb 0%, #4e54c8 100%);
+  font-family: 'Poppins', sans-serif;
   height: 100vh;
-  background: #e0e5ec;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  position: relative;
 }
 
-.signup-box {
-  background: #e0e5ec;
-  padding: 40px;
-  border-radius: 20px;
-  box-shadow: 20px 20px 60px #babecc,
-              -20px -20px 60px #ffffff;
-  width: 350px;
+.background-shapes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.4;
+  animation: float 6s ease-in-out infinite alternate;
+}
+
+.shape1 {
+  width: 300px;
+  height: 300px;
+  background: #8E44AD;
+  top: -50px;
+  left: -50px;
+}
+
+.shape2 {
+  width: 200px;
+  height: 200px;
+  background: #F5B041;
+  bottom: -60px;
+  right: -60px;
+}
+
+.shape3 {
+  width: 150px;
+  height: 150px;
+  background: #ffffff55;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(20px); }
+}
+
+.signup-container {
+  background: #ffffff;
+  padding: 30px 30px;
+  height: 97%;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  width: 380px;
+  max-width: 90%;
   text-align: center;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease;
 }
 
-.signup-box h2 {
-  color: #333;
-  margin-bottom: 25px;
+.signup-container:hover {
+  transform: scale(1.02);
 }
 
-.signup-box input[type="text"],
-.signup-box input[type="email"],
-.signup-box input[type="password"] {
+.signup-container h2 {
+  color: #8E44AD;
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 28px;
+}
+
+.signup-container p {
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-group i {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  color: #8E44AD;
+}
+
+.input-group input {
   width: 100%;
-  padding: 15px;
-  margin: 12px 0;
-  border: none;
-  border-radius: 10px;
-  background: #e0e5ec;
-  box-shadow: inset 5px 5px 10px #babecc,
-              inset -5px -5px 10px #ffffff;
-  font-size: 15px;
+  padding: 12px 15px 12px 45px;
+  border: 1px solid #F5B041;
+  border-radius: 8px;
+  background: #fff;
   outline: none;
+  transition: all 0.3s ease;
   color: #333;
 }
 
-.signup-box button {
+.input-group input:focus {
+  border-color: #8E44AD;
+  box-shadow: 0 0 5px rgba(142, 68, 173, 0.5);
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #666;
+  font-size: 18px;
+  user-select: none;
+}
+
+.toggle-password:hover {
+  color: #8E44AD;
+}
+
+button {
   width: 100%;
   padding: 15px;
-  margin-top: 20px;
   border: none;
-  border-radius: 10px;
-  background: #e0e5ec;
-  box-shadow: 5px 5px 15px #babecc,
-              -5px -5px 15px #ffffff;
+  border-radius: 8px;
+  background: radial-gradient(circle at top left, #8f94fb 0%, #4e54c8 100%);
+  color: #fff;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  color: #333;
+  transition: all 0.3s ease;
 }
 
-.login-link {
-  margin-top: 15px;
+button:hover {
+  background:  linear-gradient(45deg, #F5B041, #8E44AD);
+}
+
+.login-text {
+  margin-top: 20px;
   font-size: 14px;
   color: #333;
 }
 
-.login-link a {
-  color: #333;
+.login-text a {
+  color: #8E44AD;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 600;
 }
+
+.login-text a:hover {
+  text-decoration: underline;
+}
+.backhome{
+    color: #8E44AD;
+      text-decoration: none;
+      font-weight: 100;
+      cursor: pointer;
+      font-size: 14px;
+}
+.backhome a::before {
+  content: "←";
+  font-size: 20px; /* Increased from default to make it bigger */
+  margin-right: 5px; /* Space between arrow and text */
+}
+
