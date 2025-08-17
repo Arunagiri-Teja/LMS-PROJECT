@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Terms & Conditions - LMS Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background: linear-gradient(to right, #e0e7ff, #ffffff, #dbeafe);
+            color: #1f2937; /* Dark Slate Blue */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .terms-card {
+            background: #ffffff;
+            border-radius: 24px; /* Matches landing page cards */
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 700px;
+            padding: 40px;
+            text-align: center;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .terms-header {
+            margin-bottom: 20px;
+        }
+
+        .terms-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1e3a8a; /* Indigo */
+            margin: 0;
+        }
+
+        .terms-header p {
+            color: #6b7280; /* Medium Grey */
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .terms-content {
+            height: 300px;
+            overflow-y: auto;
+            text-align: left;
+            padding-right: 20px;
+            margin-bottom: 30px;
+            line-height: 1.8;
+            color: #4b5563; /* Darker Grey */
+        }
+        
+        /* Custom Scrollbar themed to the landing page */
+        .terms-content::-webkit-scrollbar { width: 6px; }
+        .terms-content::-webkit-scrollbar-track { background: #e5e7eb; }
+        .terms-content::-webkit-scrollbar-thumb { background-color: #facc15; border-radius: 6px; } /* Yellow Accent */
+        .terms-content::-webkit-scrollbar-thumb:hover { background-color: #fbbF24; }
+
+        .terms-content h4 {
+            font-weight: 600;
+            color: #1e3a8a; /* Indigo */
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .terms-content ul {
+            list-style-position: inside;
+            padding-left: 0;
+        }
+        .terms-content li::marker {
+            color: #facc15; /* Yellow Accent */
+        }
+
+        .accept-area {
+            margin-bottom: 30px;
+        }
+
+        .custom-checkbox {
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .custom-checkbox input { display: none; }
+        .checkmark {
+            height: 22px;
+            width: 22px;
+            background-color: #f3f4f6; /* Light Grey */
+            border: 2px solid #d1d5db; /* Grey Border */
+            border-radius: 6px;
+            margin-right: 12px;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .custom-checkbox:hover .checkmark {
+            border-color: #facc15;
+        }
+        .custom-checkbox input:checked + .checkmark {
+            background-color: #facc15; /* Yellow Accent */
+            border-color: #facc15;
+        }
+        .checkmark::after {
+            content: "";
+            position: absolute;
+            display: none;
+            left: 7px;
+            top: 2px;
+            width: 5px;
+            height: 12px;
+            border: solid #1f2937; /* Dark Text Color */
+            border-width: 0 3px 3px 0;
+            transform: rotate(45deg);
+        }
+        .custom-checkbox input:checked + .checkmark::after {
+            display: block;
+        }
+
+        .continue-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #facc15; /* Yellow Accent */
+            color: #1f2937; /* Dark Text Color */
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(250, 204, 21, 0.3);
+        }
+
+        .continue-btn:hover:not([disabled]) {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(250, 204, 21, 0.4);
+            background-color: #fbbF24;
+        }
+        
+        .continue-btn[disabled] {
+            background-color: #e5e7eb; /* Muted Grey */
+            color: #9ca3af;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #9ca3af;
+        }
+    </style>
+</head>
+<body>
+    <div class="terms-card">
+        <div class="terms-header">
+            <h1>Terms & Conditions</h1>
+            <!-- <p>Last Updated: <span id="lastUpdatedDate"></span></p> -->
+        </div>
+
+        <div class="terms-content" id="termsContent">
+            <h4>1. Introduction</h4>
+            <p>Welcome to <span class="platform-name">LMS Pro</span>. These terms and conditions outline the rules and regulations for the use of our platform and services. By accessing this website, we assume you accept these terms and conditions.</p>
+
+            <h4>2. User Accounts</h4>
+            <ul>
+                <li>To use most features of <span class="platform-name">LMS Pro</span>, you must register for an account.</li>
+                <li>You must provide accurate and complete information and keep your account information updated.</li>
+                <li>You are responsible for the security of your account and password. Sharing your account credentials is strictly prohibited.</li>
+            </ul>
+
+            <h4>3. Content & Purchases</h4>
+            <ul>
+                <li>Do not upload, post or otherwise transmit any content that is offensive, inappropriate, or infringes on any copyright or trademark.</li>
+                <li>All purchases of premium courses or subscriptions on <span class="platform-name">LMS Pro</span> are final and non-refundable.</li>
+            </ul>
+
+            <h4>4. Termination</h4>
+            <p>We may terminate or suspend your account, without prior notice, for conduct that we believe violates these Terms, is harmful to other users of the service, us, or third parties, or for any other reason.</p>
+        </div>
+
+        <div class="accept-area">
+            <label class="custom-checkbox">
+                <input type="checkbox" id="acceptCheckbox"/>
+                <span class="checkmark"></span>
+                I have read and agree to the Terms & Conditions
+            </label>
+        </div>
+
+        <a href="index.html" class="continue-btn" id="continueBtn">Continue</a>
+
+        <footer>© 2025 <span class="platform-name">LMS Pro</span>. All rights reserved.</footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- DYNAMIC VALUES ---
+            const config = {
+                platformName: 'LMS Pro',
+            };
+
+            // Dynamically set platform name
+            document.querySelectorAll('.platform-name').forEach(el => {
+                el.textContent = config.platformName;
+            });
+            
+            // Dynamically set the date
+            const today = new Date();
+            const dateString = today.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            document.getElementById('lastUpdatedDate').textContent = dateString;
+
+            // --- BUTTON LOGIC ---
+            const checkbox = document.getElementById('acceptCheckbox');
+            const continueBtn = document.getElementById('continueBtn');
+
+            // Initially disable the button
+            continueBtn.setAttribute('disabled', true);
+
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    continueBtn.removeAttribute('disabled');
+                } else {
+                    continueBtn.setAttribute('disabled', true);
+                }
+            });
+
+            continueBtn.addEventListener('click', function(event) {
+                if (continueBtn.hasAttribute('disabled')) {
+                    event.preventDefault(); // Stop navigation if button is disabled
+                }
+            });
+        });
+    </script>
+</body>
+</html>
