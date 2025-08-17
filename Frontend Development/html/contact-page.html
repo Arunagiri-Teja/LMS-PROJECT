@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Contact & Support - LMS Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #e0e7ff, #ffffff, #dbeafe);
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden; /* FIXED: Changed from overflow: hidden to allow vertical scroll */
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(250, 204, 21, 0.15), rgba(59, 130, 246, 0.15), transparent 70%);
+            transform: translate(-50%, -50%);
+            filter: blur(100px);
+            z-index: 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .contact-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            width: 100%;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        h1 {
+            color: #1e3a8a;
+            font-weight: 700;
+            font-size: 2.5rem;
+        }
+
+        h3 {
+            color: #1e3a8a;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .contact-wrapper > p {
+            color: #6b7280;
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 10px;
+            border: 1px solid #d1d5db;
+            background-color: rgba(249, 250, 251, 0.8);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+        }
+        
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form button {
+            background-color: #facc15;
+            color: #1f2937;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(250, 204, 21, 0.3);
+            margin-top: 1rem;
+        }
+
+        .contact-form button:hover {
+            background-color: #fbbF24;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(250, 204, 21, 0.4);
+        }
+
+        #successMsg {
+            text-align: center;
+            color: #059669;
+            font-weight: 500;
+            margin-top: 10px;
+            height: 1rem;
+        }
+
+        .chat-links {
+            margin: 40px 0;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding: 30px 0;
+        }
+
+        .chat-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px;
+            padding: 12px 24px;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+        .chat-links a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+        
+        .chat-links a.whatsapp { background: #25d366; }
+        .chat-links a.telegram { background: #0088cc; }
+
+        .faq-section { margin-top: 40px; }
+
+        .faq {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .faq:last-child { border-bottom: none; }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 18px 5px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: left;
+            font-size: 1rem;
+            color: #1e3a8a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-question::after {
+            content: '\f067';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            transition: transform 0.3s ease;
+        }
+
+        .faq.active .faq-question::after {
+            transform: rotate(135deg);
+        }
+
+        .faq-answer {
+            overflow: hidden;
+            max-height: 0;
+            opacity: 0;
+            padding-left: 10px;
+            text-align: left;
+            color: #4b5563;
+            transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq.active .faq-answer {
+            max-height: 200px;
+            opacity: 1;
+            padding-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="contact-wrapper">
+        <h1>Contact & Support</h1>
+        <p>Need help? Fill out the form or reach us via our live chat channels below.</p>
+
+        <form id="contactForm" class="contact-form">
+            <input type="text" id="name" placeholder="Your Name" required />
+            <input type="email" id="email" placeholder="Your Email" required />
+            <input type="text" id="subject" placeholder="Subject" required />
+            <textarea id="message" rows="5" placeholder="Your Message..." required></textarea>
+            <button type="submit">Send Message</button>
+            <p id="successMsg"></p>
+        </form>
+
+        <div class="chat-links">
+            <h3>Live Chat Support</h3>
+            <a href="https://wa.me/919876543210" target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp Chat</a>
+            <a href="https://t.me/yourtelegrambot" target="_blank" class="telegram"><i class="fab fa-telegram"></i> Telegram Chat</a>
+        </div>
+
+        <div class="faq-section">
+            <h3>Frequently Asked Questions</h3>
+            <div class="faq">
+                <button class="faq-question">How do I enroll in a course?</button>
+                <div class="faq-answer">Click “Enroll Now” on the course card from our homepage. All courses require signup and are available under our subscription plans.</div>
+            </div>
+            <div class="faq">
+                <button class="faq-question">Can I contact support anytime?</button>
+                <div class="faq-answer">Yes, our support team is available 24/7 via the WhatsApp and Telegram chat links provided above. We are happy to help!</div>
+            </div>
+            <div class="faq">
+                <button class="faq-question">Will I get a certificate?</button>
+                <div class="faq-answer">Absolutely! You will receive a verifiable digital certificate upon successful completion of any course on our platform.</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("contactForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const successMsg = document.getElementById("successMsg");
+            successMsg.textContent = "✅ Your message has been sent successfully!";
+            this.reset();
+            setTimeout(() => {
+                successMsg.textContent = "";
+            }, 5000);
+        });
+
+        const faqs = document.querySelectorAll('.faq');
+        faqs.forEach(faq => {
+            const question = faq.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                faqs.forEach(otherFaq => {
+                    if (otherFaq !== faq && otherFaq.classList.contains('active')) {
+                        otherFaq.classList.remove('active');
+                    }
+                });
+                faq.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>

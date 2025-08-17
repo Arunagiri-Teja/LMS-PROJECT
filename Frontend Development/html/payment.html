@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Secure Payment - LMS Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top left, #ffffff, #ffffff);
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      max-width: 1200px;
+      width: 100%;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      border-radius: 1.25rem;
+      padding: 2.5rem 2rem;
+      width: 100%;
+      max-width: 480px;
+      text-align: center;
+      transition: transform 0.4s ease;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .payment-img {
+      width: 380px;
+      height: auto;
+      border-radius: 30px;
+      transition: transform 0.4s ease;
+    }
+
+    .payment-img:hover {
+      transform: scale(1.02);
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(40px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .pay-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 1.2rem;
+      margin-bottom: 1rem;
+      border: 1.5px solid #e0e7ff;
+      border-radius: 0.75rem;
+      background-color: #f9fafb;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .pay-option i {
+      font-size: 1.25rem;
+      margin-right: 0.75rem;
+    }
+
+    /* Hover Soft Tints */
+    .pay-option:hover:nth-child(1) { background-color: #e6f0ff; } /* Card - Blue */
+    .pay-option:hover:nth-child(2) { background-color: #e6f7ff; } /* GPay */
+    .pay-option:hover:nth-child(3) { background-color: #f3e8ff; } /* PhonePe */
+    .pay-option:hover:nth-child(4) { background-color: #e8fdf2; } /* UPI */
+
+    /* Selected Option */
+    .pay-option.selected:nth-child(1) { background-color: #d6e9ff; border-color: #2563eb; }
+    .pay-option.selected:nth-child(2) { background-color: #dcecff; border-color: #3b82f6; }
+    .pay-option.selected:nth-child(3) { background-color: #ede3ff; border-color: #8b5cf6; }
+    .pay-option.selected:nth-child(4) { background-color: #d7f5e7; border-color: #10b981; }
+
+    button {
+      transition: all 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      .payment-img {
+        width: 100%;
+        max-width: 360px;
+        margin: 0 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="../Assets/Payment Information.gif" class="payment-img" alt="Payment Illustration">
+    <div class="glass-card">
+      <h2 class="text-2xl font-bold text-indigo-700 mb-3">Confirm Your Plan</h2>
+      <p class="text-sm text-gray-600 mb-5" id="planDetails">Plan: [Name] - [Price]</p>
+
+      <div id="paymentMethods">
+        <div class="pay-option" onclick="selectOption(this); window.location.href='card-payment.html'"><i class="fas fa-credit-card text-indigo-600"></i> Pay with Card</div>
+        <div class="pay-option" onclick="selectOption(this); window.location.href='gpay-payment.html'"><i class="fab fa-google text-blue-500"></i> Pay with GPay</div>
+        <div class="pay-option" onclick="selectOption(this); window.location.href='phonepe-payment.html'"><i class="fab fa-paypal text-purple-600"></i> Pay with PhonePe</div>
+        <div class="pay-option" onclick="selectOption(this); window.location.href='upi-payment.html'"><i class="fas fa-university text-green-600"></i> Pay with UPI</div>
+      </div>
+
+      <button class="mt-6 px-6 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-md w-full">
+        Proceed to Pay
+      </button>
+
+      <p class="text-xs text-gray-500 mt-4">
+        100% secure & encrypted. <a href="./pricing.html" class="text-indigo-500 hover:underline">Back to Plans</a>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const planParams = new URLSearchParams(window.location.search);
+    const plan = planParams.get("plan") || "Pro";
+    const price = planParams.get("price") || "₹999/month";
+    document.getElementById("planDetails").textContent = `Plan: ${plan} - ${price}`;
+
+    function selectOption(selected) {
+      document.querySelectorAll(".pay-option").forEach(el => el.classList.remove("selected"));
+      selected.classList.add("selected");
+    }
+  </script>
+</body>
+</html>
