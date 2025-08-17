@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LMS Pro - Pricing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+    <style>
+    body {
+        background: linear-gradient(to right, #e0e7ff, #ffffff, #dbeafe);
+        font-family: 'Poppins', sans-serif;
+        min-height: 100vh;
+        margin: 0;
+    }
+    .navbar {
+        background: linear-gradient(135deg, rgba(17, 24, 39, 0.95), rgba(30, 41, 59, 0.9));
+        backdrop-filter: blur(12px);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 50;
+        height: 80px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        transition: background 0.3s ease;
+    }
+    .navbar:hover {
+        background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(49, 46, 129, 0.9));
+    }
+    .nav-links a {
+        position: relative;
+        padding-bottom: 4px;
+    }
+    .nav-links a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #facc15;
+        transition: width 0.3s ease;
+    }
+    .nav-links a:hover::after {
+        width: 100%;
+    }
+    .pricing-section {
+        margin-top: 80px;
+        padding: 6rem 0;
+        background: linear-gradient(135deg, #e0e7ff, #dbeafe, #e0e7ff);
+        animation: gradientShift 10s ease infinite;
+        background-size: 200% 200%;
+        position: relative;
+        overflow: hidden;
+    }
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    .pricing-card {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(8px);
+        border-radius: 1.5rem;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+        will-change: transform, opacity;
+    }
+    .pricing-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(250, 204, 21, 0.5);
+    }
+    .pricing-card.trial {
+        border: 2px solid #facc15;
+    }
+    .pricing-card.popular {
+        border: 4px solid #facc15;
+    }
+    .pricing-card .price {
+        font-size: 3rem;
+        font-weight: 800;
+        color: #1e3a8a;
+        background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .pricing-card .btn-choose {
+        background: linear-gradient(135deg, #facc15, #fcd34d);
+        color: #1f2937;
+        padding: 0.75rem 2rem;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease-out;
+        z-index: 1;
+        width: 100%; /* Adjusted to fit container */
+        display: block; /* Ensures width works */
+        text-align: center; /* Centers text */
+        max-width: 200px; /* Limits max width for smaller screens */
+        margin: 0 auto; /* Centers the button */
+    }
+    .pricing-card .btn-choose::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: radial-gradient(circle, rgba(250, 204, 21, 0.7) 0%, transparent 70%);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition: width 0.5s ease, height 0.5s ease;
+        z-index: -1;
+    }
+    /* .pricing-card .btn-choose:hover::before {
+        width: 400px;
+        height: 400px;
+    } */
+    .pricing-card .btn-choose:hover {
+        transform: translateY(-3px) scale(1.05);
+        /* box-shadow: 0 5px 20px rgba(168, 193, 213, 0.8); */
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+    }
+    .particle-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+    }
+    
+    footer {
+        background: linear-gradient(to right, #1e3a8a, #3b82f6);
+        color: white;
+        padding: 3rem 0;
+    }
+    .price-premium{
+
+        font-weight: 900;
+        font-size: 2.7rem;
+        color: #1e3a8a;
+        background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+</style>
+</head>
+<body>
+    <header class="navbar fixed top-0 left-0 w-full z-50 shadow-lg" id="pricing">
+        <div class="container mx-auto px-4 flex justify-between items-center py-4">
+            <div class="logo text-2xl font-bold text-white">LMS Pro</div>
+            <nav class="nav-links flex items-center gap-6">
+                <a href="../homepage.html" class="text-gray-200 hover:text-yellow-400 transition">Home</a>
+                <a href="../homepage.html#courses" class="text-gray-200 hover:text-yellow-400 transition">Courses</a>
+                <a href="../homepage.html#offers" class="text-gray-200 hover:text-yellow-400 transition">Offers</a>
+                <a href="../homepage.html#reviews" class="text-gray-200 hover:text-yellow-400 transition">Reviews</a>
+                <a href="../homepage.html#webinars" class="text-gray-200 hover:text-yellow-400 transition">Webinars</a>
+                <a href="#pricing" class="text-gray-200 hover:text-yellow-400 transition">Plans & Pricing</a>
+                <!-- <a href="./homepage/login.html" class="btn login-btn bg-transparent border-2 border-yellow-400 text-yellow-400 px-4 py-2 rounded-lg hover:bg-yellow-400 hover:text-gray-900 transition">Login</a>
+                <a href="./html/signup.html" class="btn signup-btn bg-yellow-400 text-gray-900 px-4 py-2 rounded-lg hover:bg-yellow-500 transition">Signup</a> -->
+                <div class="profile-menu hidden relative">
+                    <button id="profileMenuButton" class="profile-btn flex items-center gap-2">
+                        <img id="profile-avatar" src="./Assets/user-avatar.png" alt="User" class="w-10 h-10 rounded-full border-2 border-yellow-400"/>
+                        <span id="profile-name" class="text-gray-200 font-medium">Alex Doe</span>
+                        <i class="fa-solid fa-caret-down text-gray-200"></i>
+                    </button>
+                    <div id="profileDropdown" class="dropdown-menu hidden absolute right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg w-48">
+                        <a href="./html/edit-profile.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Edit Profile</a>
+                        <a href="./html/my-courses.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">My Courses</a>
+                        <a href="#" id="logoutBtn" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Logout</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="pricing-section">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-extrabold text-indigo-900 mb-12 tracking-tight">Choose Your Learning Plan</h2>
+            <p class="text-lg text-gray-600 mb-16 max-w-2xl mx-auto">Unlock your potential with our flexible pricing plans tailored to your learning goals.</p>
+            <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+                <!-- Trial Plan -->
+                <div class="pricing-card trial">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-indigo-900 mb-4">Offer</h3>
+                        <div class="price mb-6">₹1<span class="text-lg font-bold text-gray-600">/30 days</span></div>
+                        <p class="text-gray-600 mb-6">Try LMS Pro for 30 days at an unbeatable price!</p>
+                        <ul class="text-left text-gray-700 mb-8 space-y-3">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Access to 3 courses</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Community support</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Certificate of completion</li>
+                        </ul>
+                        <a href="./payment.html?plan=30-day Trail&price=₹1" class="btn-choose">Enroll</a>
+                    </div>
+                </div>
+                <!-- Basic Plan -->
+                <div class="pricing-card">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-indigo-900 mb-4">Basic</h3>
+                        <div class="price mb-6">₹499<span class="text-lg font-bold text-gray-600">/m</span></div>
+                        <p class="text-gray-600 mb-6">Perfect for beginners looking to start their learning journey.</p>
+                        <ul class="text-left text-gray-700 mb-8 space-y-3">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Access to 5 courses</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Community support</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Certificate of completion</li>
+                        </ul>
+                        <a href="./payment.html?plan=Basic&price=₹499/month" class="btn-choose">Enroll</a>
+                    </div>
+                </div>
+                <!-- Pro Plan -->
+                <div class="pricing-card popular">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-indigo-900 mb-4">Popular</h3>
+                        <div class="price mb-6">₹999<span class="text-lg font-bold text-gray-600">/m</span></div>
+                        <p class="text-gray-600 mb-6">Ideal for professionals seeking advanced skills.</p>
+                        <ul class="text-left text-gray-700 mb-8 space-y-3">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Unlimited course access</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Priority support</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Certificate of completion</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Access to webinars</li>
+                        </ul>
+                        <a href="./payment.html?plan=Popular&price=₹999/month" class="btn-choose">Enroll</a>
+                    </div>
+                </div>
+                <!-- Premium Plan -->
+                <div class="pricing-card">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-indigo-900 mb-4">Premium</h3>
+                        <div class="price-premium mb-6">₹1999<span class="text-lg font-bold text-gray-600">/m</span></div>
+                        <p class="text-gray-600 mb-6">For dedicated learners wanting the full experience.</p>
+                        <ul class="text-left text-gray-700 mb-8 space-y-3">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Unlimited course access</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>1:1 mentorship</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Certificate of completion</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Access to webinars</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Exclusive projects</li>
+                        </ul>
+                        <a href="./payment.html?plan=Premium&price=₹1999/month" class="btn-choose">Enroll<a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gradient-to-r from-indigo-900 to-blue-800 text-white py-12">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+            <div>
+                <h4 class="text-xl font-semibold mb-4 text-yellow-400">LMS Pro</h4>
+                <p class="text-sm text-gray-200">Your one-stop solution to upskill with premium courses, webinars, and learning tools.</p>
+            </div>
+            <div>
+                <h4 class="text-lg font-semibold mb-4 text-yellow-400">Quick Links</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="./index.html" class="text-gray-200 hover:text-yellow-400 transition duration-300">Home</a></li>
+                    <li><a href="./index.html#courses" class="text-gray-200 hover:text-yellow-400 transition duration-300">Courses</a></li>
+                    <li><a href="./index.html#webinars" class="text-gray-200 hover:text-yellow-400 transition duration-300">Webinars</a></li>
+                    <li><a href="./html/login.html" class="text-gray-200 hover:text-yellow-400 transition duration-300">Login / Signup</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-lg font-semibold mb-4 text-yellow-400">Connect With Us</h4>
+                <p class="text-sm text-gray-200">Email: <a href="mailto:support@lmspro.com" class="hover:text-yellow-400 transition duration-300">support@lmspro.com</a></p>
+                <p class="text-sm text-gray-200">Phone: <a href="tel:+919876543210" class="hover:text-yellow-400 transition duration-300">+91 98765 43210</a></p>
+                <div class="flex justify-center md:justify-start gap-4 mt-4">
+                    <a href="#" class="text-xl text-gray-200 hover:text-blue-400 hover:scale-110 transition duration-300"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-xl text-gray-200 hover:text-pink-400 hover:scale-110 transition duration-300"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-xl text-gray-200 hover:text-sky-400 hover:scale-110 transition duration-300"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-xl text-gray-200 hover:text-red-500 hover:scale-110 transition duration-300"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="mt-8 border-t border-indigo-600 pt-6 text-center text-sm text-gray-300">
+            © 2025 <span class="font-semibold text-yellow-400">LMS Pro</span>. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Pricing cards animation
+        gsap.utils.toArray('.pricing-card').forEach((card, i) => {
+            gsap.from(card, {
+                opacity: 0,
+                y: 80,
+                scale: 0.95,
+                duration: 0.7,
+                delay: i * 0.2,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 85%',
+                    fastScrollEnd: true,
+                    anticipatePin: true
+                },
+                onComplete: () => {
+                    card.style.opacity = 1;
+                    card.style.transform = 'none';
+                }
+            });
+
+            // Hover animation with quickSetter for performance
+            const setCardHover = gsap.quickSetter(card, 'css');
+            card.addEventListener('mouseenter', () => {
+                setCardHover({ scale: 1.02, y: -10, boxShadow: '0 15px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(250, 204, 21, 0.5)' });
+            });
+            card.addEventListener('mouseleave', () => {
+                setCardHover({ scale: 1, y: 0, boxShadow: '0 12px 24px rgba(0, 0, 0, 0.2)' });
+            });
+        });
+
+        // Background color transition on scroll
+        gsap.to('.pricing-section', {
+            background: 'linear-gradient(135deg, #c7d2fe, #ffffff, #bfdbfe)',
+            scrollTrigger: {
+                trigger: '.pricing-section',
+                start: 'top 50%',
+                end: 'bottom 50%',
+                scrub: 1,
+                fastScrollEnd: true
+            }
+        });
+
+        // Particle burst effect for buttons
+        document.querySelectorAll('.btn-choose').forEach(btn => {
+            const canvas = document.createElement('canvas');
+            canvas.className = 'particle-canvas';
+            btn.appendChild(canvas);
+            const ctx = canvas.getContext('2d');
+            canvas.width = 200;
+            canvas.height = 200;
+            canvas.style.width = '200px';
+            canvas.style.height = '200px';
+            canvas.style.position = 'absolute';
+            canvas.style.top = '50%';
+            canvas.style.left = '50%';
+            canvas.style.transform = 'translate(-50%, -50%)';
+            let particles = [];
+
+        });
+
+        // Profile menu
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginBtn = document.querySelector('.login-btn');
+            const signupBtn = document.querySelector('.signup-btn');
+            const profileMenu = document.querySelector('.profile-menu');
+            const profileMenuButton = document.getElementById('profileMenuButton');
+            const dropdown = document.getElementById('profileDropdown');
+            const logoutBtn = document.getElementById('logoutBtn');
+
+            const user = {
+                name: 'Alex Doe',
+                avatar: './Assets/user-avatar.png',
+            };
+
+            if (user) {
+                loginBtn.classList.add('hidden');
+                signupBtn.classList.add('hidden');
+                profileMenu.classList.remove('hidden');
+                document.getElementById('profile-name').textContent = user.name;
+                document.getElementById('profile-avatar').src = user.avatar;
+            }
+
+            profileMenuButton?.addEventListener('click', () => {
+                dropdown.classList.toggle('hidden');
+                gsap.fromTo(dropdown, { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.3 });
+            });
+
+            window.addEventListener('click', (e) => {
+                if (!profileMenuButton.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.classList.add('hidden');
+                }
+            });
+
+            logoutBtn?.addEventListener('click', () => {
+                alert('Logging out...');
+                window.location.reload();
+            });
+        });
+    </script>
+</body>
+</html>
